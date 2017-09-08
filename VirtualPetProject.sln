@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualPetProject", "VirtualPetProject\VirtualPetProject.csproj", "{11FF4331-2E16-4D2D-8DF9-6CB6974178CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11FF4331-2E16-4D2D-8DF9-6CB6974178CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11FF4331-2E16-4D2D-8DF9-6CB6974178CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11FF4331-2E16-4D2D-8DF9-6CB6974178CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11FF4331-2E16-4D2D-8DF9-6CB6974178CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
