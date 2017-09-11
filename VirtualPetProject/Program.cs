@@ -5,35 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace VirtualPetProject
+
+    //this program will let you choose and manipulate a virtual pet
+    //three fields and properties
+    //three methods
+    //one+ constructor
+    //updated pet status
+    //action selection menu
 {
     class Program
-    {
-        static void Main(string[] args)
+    { 
+        static void Main(string[] args)  //intro and initial pet selection
         {
             Console.WriteLine("Welcome to the Gatlantiss Pet Store!");
             Console.WriteLine("The only shop offering REAL LIVE DINOSAURS!");
+            Console.WriteLine();
 
             Console.WriteLine("First things first...");
             Console.WriteLine("Would you like to adopt a \"T Rex\" or a \"Tricerotops\"?");
-            string breed = Console.ReadLine();  //can you make non-case sensitive? (need to change other code if so)
+            string breed = Console.ReadLine();  //breed will pass to the constructor.
+                                                //constructor will set initial stats depending on choice
 
-            Console.WriteLine($"\nCongrats! You now own a beautiful {breed}!"); //maybe offer choice, trex or steg
-                                                                                //then if else depending on choice, with different constructors
-                                                                                //one veggie, one beef, etc.
+            Console.WriteLine($"\nCongrats! You now own a beautiful {breed}!");
 
             Console.WriteLine("What would you like to name it?");
             string name = Console.ReadLine();
             Console.WriteLine();
 
-            Pet dino = new Pet(breed);
+            Pet dino = new Pet(breed); //creates instance of dino
 
             bool isAlive = true;
 
             //make this a loop somehow
 
-            while (isAlive == true)
+            while (isAlive == true)  //loop will run until the pet is dead (choice SendToFarm)
             {
-                dino.PetStatus(name);
+                dino.PetStatus(name);  //will display pet's moods
 
                 Console.WriteLine($"OK, now what would you like to do with {name}? Choose from:");
                 Console.WriteLine("   1.  Learn about your pet");
@@ -42,85 +49,42 @@ namespace VirtualPetProject
                 Console.WriteLine("   4.  Play with your pet");
                 Console.WriteLine("   5.  Send your pet to the farm. (quit)");
 
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine()); //user chooses what to do with pet
 
                 if (choice == 1)
 
-                { dino.AboutPet(breed); }
-
-                //{
-                //    if (breed == "T Rex")
-                //    {
-
-
-                //        dino.AboutPet(breed);
-                //    }
-
-                //    if (breed == "Tricerotops")
-                //    {
-                //        dino.AboutPet();
-                //    }
-                //}
-
+                { dino.AboutPet(breed); } //method displays unchanging facts
+                
                 if (choice == 2)
                 {
-                    dino.FeedPet(breed);
+                    dino.FeedPet(breed); //method feeds pet, changes danger/hunger level
                 }
 
                 if (choice == 3)
                 {
-                    dino.WalkPet();
+                    dino.WalkPet();  //method allows or disallows walking, based on mood of pet
                 }
 
                 if (choice == 4)
                 {
-                    dino.PetPet();
+                    dino.PetPet();  //method increases or decreases pet happiness
                 }
 
                 if (choice == 5)
                 {
-                    ToTheFarm(name);
-                    isAlive = false;
+                    ToTheFarm(name);  //method kills pet
+                    isAlive = false;  //ends loop (and therefore ends game)
                 }
 
-                //else  //lol this just happens
-                //{
-                //    Rampage(name, breed);
-                //    isAlive = false;
-                //}
-
                 Console.ReadLine();
-
-
             }
         }
 
-        static void ToTheFarm(string name)
+        static void ToTheFarm(string name) //this method kills pet/ends game
         {
             Console.WriteLine("\nYou \"send your pet to the farm.\"");
             Console.WriteLine($"{name} is now dead.");
             Console.WriteLine("You are a terrible person.");
-            Console.WriteLine();
-            Console.WriteLine("GAME OVER.");
-
-        }
-
-        static void Rampage(string name, string breed)
-        {
-            Console.WriteLine($"\nOMG! {name} is rampaging out of control!");
-            Console.WriteLine("The mayhem ends when");
-
-            if (breed == "T Rex")
-            {
-                Console.WriteLine($"{name} eats you in one gulp.");
-            }
-
-            if (breed == "Tricerotops")
-            {
-                Console.WriteLine($"{name} gores you while charging an oak tree.");
-            }
-
-            Console.WriteLine("Dinosaurs are risky pets.");
             Console.WriteLine();
             Console.WriteLine("GAME OVER.");
         }

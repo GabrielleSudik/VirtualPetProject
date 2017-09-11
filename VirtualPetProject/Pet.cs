@@ -11,7 +11,6 @@ namespace VirtualPetProject
         //fields
 
         private string breed;
-        private bool isHungry;
         private bool isVegetarian;
         private int dangerLevel;
         private int happiness; 
@@ -23,12 +22,6 @@ namespace VirtualPetProject
         {
             get { return this.breed; }
             set { this.breed = value; }
-        }
-
-        public bool IsHungry
-        {
-            get { return this.isHungry; }
-            set { this.isHungry = value; }
         }
 
         public bool IsVegetarian
@@ -43,8 +36,7 @@ namespace VirtualPetProject
             set { this.dangerLevel = value; }
         }
 
-
-            public int Happiness
+        public int Happiness
         {
             get { return this.happiness; }
             set { this.happiness = value; }
@@ -55,7 +47,6 @@ namespace VirtualPetProject
             get { return this.sound; }
             set { this.sound = value; }
         }
-
 
         //constructors
 
@@ -68,7 +59,7 @@ namespace VirtualPetProject
             this.sound = "gentle rumble"; 
         }
 
-        public Pet(string breed)  //can you use this to assign stats to one type, and the default to the other type?
+        public Pet(string breed)  //mostly same as default, but with if statement to set other variables
         {
             this.breed = breed;
             this.isVegetarian = true;
@@ -84,17 +75,10 @@ namespace VirtualPetProject
             }
         }
 
-
-
         //methods
 
-        //intro. 
-        //a show stats method. maybe accept the name here.
-        //hungry, danger, teeth all in one
-        //or hungry and veggie, danger and teeth
-        //sound, maybe when pet or something
-
-            public void PetStatus(string name)
+        public void PetStatus(string name)  //called in Main's loop each time. shows pet mood.
+                                            //shows hunger level, safety for walking, general happiness
         {
             Console.WriteLine($"Here's how {name} is feeling:\n");
             string hungerStatus = "";
@@ -116,7 +100,6 @@ namespace VirtualPetProject
 
             Console.WriteLine(hungerStatus);
 
-
             string walkStatus = "";
 
             if (dangerLevel > 1)
@@ -130,7 +113,6 @@ namespace VirtualPetProject
             }
 
             Console.WriteLine(walkStatus);
-
 
             string happinessStatus = "";
 
@@ -146,15 +128,14 @@ namespace VirtualPetProject
 
             else
             {
-                happinessStatus = "  Your pet is unhappy, and needs some playtime.";
+                happinessStatus = "  Your pet is unhappy. Better be nice to it.";
             }
 
             Console.WriteLine(happinessStatus);
             Console.WriteLine();
-
         }
 
-    public void AboutPet(string breed)
+    public void AboutPet(string breed) //when selected, shows unchanging info about chosen pet
         {
             if (breed == "T Rex")
             {
@@ -166,15 +147,16 @@ namespace VirtualPetProject
 
             else
             {
-                Console.WriteLine("The Tricerotops is slow and large, but relatively tame.");
+                Console.WriteLine("\nThe Tricerotops is slow and large, but relatively tame.");
                 Console.WriteLine("Compared to many dinosaurs, it is only slightly dangerous.");
                 Console.WriteLine("Keep it calm and sated with lots of bamboo.");
                 Console.WriteLine("When happy, it will hum at a sub-sonic pitch.");
             }
         }
 
-
-        public void FeedPet(string breed)
+        public void FeedPet(string breed)  //when chosen, options for feeding pet and change in danger level.
+                                           //feeding pet wrong food will make it more upset
+                                           //feeding it correct food will calm it
         {
             Console.WriteLine("\nDo you want to give your pet:");
             Console.WriteLine("  beef or bamboo?");
@@ -209,52 +191,39 @@ namespace VirtualPetProject
                 else
                 {
                     dangerLevel += 2;
-                    Console.WriteLine("\nYour pet hates salad! It is now hungry AND more dangerous!");
+                    Console.WriteLine("Your pet hates salad! It is now hungry AND more dangerous!");
                 }
             }
-            
         }
 
-        public void WalkPet()
+        public void WalkPet() //when selected, lets user know if pet is safe to take for a walk.
         {
+            Console.WriteLine();
+
             if (dangerLevel >= 1)
             {
-                Console.WriteLine("\nYour pet is hungry, and too dangerous to take outside.");
-                Console.WriteLine("Hit return to see the menu again (hint: Feed your pet more).");
+                Console.WriteLine("Your pet is too dangerous to take outside. Try feeding it more.");
             }
-            //    string answer = Console.ReadLine();
-
-            //    if (answer == "yes")
-            //    {
-            //        return; //not sure if return is the right word??
-            //    }
-
-            //    else 
-            //            {
-            //        Console.WriteLine("A hungry dinosaur is a dangerous dinosaur.");
-            //        Console.WriteLine("You've been eaten by your own pet.");
-            //        Console.WriteLine("Next time, just feed it, ok?");
-
-            //        return;
-            //    }
-            //}
-
+            
             else
             {
-                Console.WriteLine("\nYour pet is satisfied and calm. You walk it without incident.");
+                Console.WriteLine("Your pet is satisfied and calm. You walk it without incident.");
             }
         }
 
-        public void PetPet()
+        public void PetPet()  //when selected, user plays with pet, increasing or decreasing happiness
+                              //will print changes in mood of pet
         {
-            Console.WriteLine("\nWhich do you want to do to play with your pet:");
+            Console.WriteLine("\nWhat do you want to do with your pet:");
             Console.WriteLine("   cuddle, chase or tease?");
             string playChoice = Console.ReadLine();
+
+            Console.WriteLine();
 
             if (playChoice == "cuddle")
             {
                 happiness += 3;
-                Console.WriteLine("Your pet loves you and is much happier!");
+                Console.WriteLine("Your pet loves cuddles and is much happier!");
             }
 
             else if (playChoice == "chase")
@@ -266,7 +235,7 @@ namespace VirtualPetProject
             else 
                     {
                 happiness--;
-                Console.WriteLine("Your pet is less happy.");
+                Console.WriteLine("Your pet does not like to be teased, and is less happy.");
             }
 
             if (happiness >= 3)
@@ -276,7 +245,7 @@ namespace VirtualPetProject
 
             else if (happiness >= 0 && happiness <= 2)
             {
-                Console.WriteLine("Your pet could use some more play time.");
+                Console.WriteLine("Your pet is content but would like more play time.");
             }
 
             else
