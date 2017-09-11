@@ -14,8 +14,7 @@ namespace VirtualPetProject
         private bool isHungry;
         private bool isVegetarian;
         private int dangerLevel;
-        private int maxDanger; //update this below
-        private int happiness; //add this below
+        private int happiness; 
         private string sound;
 
         //properties
@@ -44,11 +43,6 @@ namespace VirtualPetProject
             set { this.dangerLevel = value; }
         }
 
-        //public int NumberOfTeeth
-        //{
-        //    get { return this.numberOfTeeth; }
-        //    set { this.numberOfTeeth = value; }
-        //}
 
             public int Happiness
         {
@@ -65,25 +59,29 @@ namespace VirtualPetProject
 
         //constructors
 
-        public Pet()
+        public Pet() //default pet is tricerotops
         {
             this.breed = "Tricerotops";
-            this.isHungry = !isHungry;
             this.isVegetarian = true;
-            //this.numberOfTeeth = numberOfTeeth;
             this.dangerLevel = 6;
             this.happiness = 0;
-            this.sound = "** subsonic rumble **";  //update these
+            this.sound = "gentle rumble"; 
         }
 
         public Pet(string breed)  //can you use this to assign stats to one type, and the default to the other type?
         {
-            this.breed = "Tyrannasaurus Rex";
-            this.isHungry = isHungry;
-            this.isVegetarian = !isVegetarian;
-            //this.numberOfTeeth = 60;
-            this.dangerLevel = 10;
-            this.sound = "RRRRRRAAAAAAAARRRRRRRGGGGGHHHHHHHHHHHH!!!!!";
+            this.breed = breed;
+            this.isVegetarian = true;
+            this.dangerLevel = 6;
+            this.happiness = 0;
+            this.sound = "gentle rumble";
+
+            if (breed == "T Rex")
+            {
+                this.isVegetarian = false;
+                this.dangerLevel = 10;
+                this.sound = "RRRAAARRRGGGGHHHHH!!!";
+            }
         }
 
 
@@ -96,24 +94,82 @@ namespace VirtualPetProject
         //or hungry and veggie, danger and teeth
         //sound, maybe when pet or something
 
+            public void PetStatus(string name)
+        {
+            Console.WriteLine($"Here's how {name} is feeling:\n");
+            string hungerStatus = "";
+
+            if (dangerLevel >= 5)
+            {
+                hungerStatus = "  Your pet is very hungry.";
+            }
+
+            else if (dangerLevel >= 2 && dangerLevel <= 4)
+            {
+                hungerStatus = "  Your pet is a wee bit peckish.";
+            }
+
+            else
+            {
+                hungerStatus = "  Your pet is well fed.";
+            }
+
+            Console.WriteLine(hungerStatus);
+
+
+            string walkStatus = "";
+
+            if (dangerLevel > 1)
+            {
+                walkStatus = "  Your pet is too dangerous to take outside! It might eat something.";
+            }
+
+            else
+            {
+                walkStatus = "  Your pet is safe to take for a walk.";
+            }
+
+            Console.WriteLine(walkStatus);
+
+
+            string happinessStatus = "";
+
+            if (happiness >= 3)
+            {
+                happinessStatus = "  Your pet is very happy and loves you very much!";
+            }
+
+            else if (happiness == 1 || happiness == 2)
+                {
+                happinessStatus = "  Your pet would like more attention.";
+            }
+
+            else
+            {
+                happinessStatus = "  Your pet is unhappy, and needs some playtime.";
+            }
+
+            Console.WriteLine(happinessStatus);
+            Console.WriteLine();
+
+        }
+
     public void AboutPet(string breed)
         {
             if (breed == "T Rex")
             {
                 Console.WriteLine("\nThe T Rex is an amazingly hostile beast!");
                 Console.WriteLine("It's really rude and dangerous, so be careful about taking it outside.");
-                Console.WriteLine("But its bloodlust can be sated with a tasty slab of beef.");
-                Console.WriteLine("When cuddled, it will emit an agonizingly loud ROAR.");
-                Console.WriteLine("A very exiting pet.");
+                Console.WriteLine("But its bloodlust can be sated with lots of beef.");
+                Console.WriteLine("When happy, it will emit an agonizingly loud ROAR.");;
             }
 
             else
             {
                 Console.WriteLine("The Tricerotops is slow and large, but relatively tame.");
                 Console.WriteLine("Compared to many dinosaurs, it is only slightly dangerous.");
-                Console.WriteLine("When upset, it should be fed lots of bamboo.");
-                Console.WriteLine("When cuddled, it will hum at a sub-sonic pitch.");
-                Console.WriteLine("A gentle pet (for a dinosaur).");
+                Console.WriteLine("Keep it calm and sated with lots of bamboo.");
+                Console.WriteLine("When happy, it will hum at a sub-sonic pitch.");
             }
         }
 
@@ -124,20 +180,21 @@ namespace VirtualPetProject
             Console.WriteLine("  beef or bamboo?");
             string food = Console.ReadLine();
 
-            if (breed == "Tricerotops")
+            Console.WriteLine();
+
+            if (isVegetarian == true)
             {
                 if (food == "bamboo")
                 {
-                    //consider a pet happiness increase?
                     dangerLevel -= 4;
-                    Console.WriteLine("Your pet is happier and less dangerous.");
+                    Console.WriteLine("Your pet is less hungry and less dangerous.");
                 }
 
                 else
                 {
                     dangerLevel += 2;
                     Console.WriteLine("Your pet is upset at the thought of eating flesh.");
-                    Console.WriteLine(  "It is now angry and more dangerous!");
+                    Console.WriteLine(  "It is now hungry AND more dangerous!");
                 }
             }
 
@@ -145,15 +202,14 @@ namespace VirtualPetProject
             {
                 if (food == "beef")
                 {
-                    //consider a pet happiness increase?
                     dangerLevel -= 4;
-                    Console.WriteLine("Your pet is full and less dangerous.");
+                    Console.WriteLine("Your pet is less hungry and less dangerous.");
                 }
 
                 else
                 {
                     dangerLevel += 2;
-                    Console.WriteLine("\nYour pet hates salad! It is now angry and more dangerous!");
+                    Console.WriteLine("\nYour pet hates salad! It is now hungry AND more dangerous!");
                 }
             }
             
@@ -161,10 +217,10 @@ namespace VirtualPetProject
 
         public void WalkPet()
         {
-            if (dangerLevel <= 3)
+            if (dangerLevel >= 1)
             {
                 Console.WriteLine("\nYour pet is hungry, and too dangerous to take outside.");
-                Console.WriteLine("Hit return to see the menu again (hint: Feed your pet).");
+                Console.WriteLine("Hit return to see the menu again (hint: Feed your pet more).");
             }
             //    string answer = Console.ReadLine();
 

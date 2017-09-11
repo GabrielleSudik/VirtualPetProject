@@ -10,9 +10,12 @@ namespace VirtualPetProject
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to the Gatlantiss Pet Store!");
+            Console.WriteLine("The only shop offering REAL LIVE DINOSAURS!");
+
             Console.WriteLine("First things first...");
             Console.WriteLine("Would you like to adopt a \"T Rex\" or a \"Tricerotops\"?");
-            string breed = Console.ReadLine();
+            string breed = Console.ReadLine();  //can you make non-case sensitive? (need to change other code if so)
 
             Console.WriteLine($"\nCongrats! You now own a beautiful {breed}!"); //maybe offer choice, trex or steg
                                                                                 //then if else depending on choice, with different constructors
@@ -22,12 +25,7 @@ namespace VirtualPetProject
             string name = Console.ReadLine();
             Console.WriteLine();
 
-            Pet dino = new Pet();
-
-            //if (breed == "Tricerotops")
-            //{
-            //    Pet dino = new Pet();
-            //}
+            Pet dino = new Pet(breed);
 
             bool isAlive = true;
 
@@ -35,12 +33,14 @@ namespace VirtualPetProject
 
             while (isAlive == true)
             {
+                dino.PetStatus(name);
+
                 Console.WriteLine($"OK, now what would you like to do with {name}? Choose from:");
                 Console.WriteLine("   1.  Learn about your pet");
                 Console.WriteLine("   2.  Feed your pet");
                 Console.WriteLine("   3.  Walk your pet");
                 Console.WriteLine("   4.  Play with your pet");
-                Console.WriteLine("   5.  Send your pet to the farm.");
+                Console.WriteLine("   5.  Send your pet to the farm. (quit)");
 
                 int choice = int.Parse(Console.ReadLine());
 
@@ -83,6 +83,12 @@ namespace VirtualPetProject
                     isAlive = false;
                 }
 
+                //else  //lol this just happens
+                //{
+                //    Rampage(name, breed);
+                //    isAlive = false;
+                //}
+
                 Console.ReadLine();
 
 
@@ -94,10 +100,29 @@ namespace VirtualPetProject
             Console.WriteLine("\nYou \"send your pet to the farm.\"");
             Console.WriteLine($"{name} is now dead.");
             Console.WriteLine("You are a terrible person.");
+            Console.WriteLine();
+            Console.WriteLine("GAME OVER.");
 
-            
+        }
 
-            //return; //maybe instead of return here... the loop will end above and you can just close out?
+        static void Rampage(string name, string breed)
+        {
+            Console.WriteLine($"\nOMG! {name} is rampaging out of control!");
+            Console.WriteLine("The mayhem ends when");
+
+            if (breed == "T Rex")
+            {
+                Console.WriteLine($"{name} eats you in one gulp.");
+            }
+
+            if (breed == "Tricerotops")
+            {
+                Console.WriteLine($"{name} gores you while charging an oak tree.");
+            }
+
+            Console.WriteLine("Dinosaurs are risky pets.");
+            Console.WriteLine();
+            Console.WriteLine("GAME OVER.");
         }
     }
 }
